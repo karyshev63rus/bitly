@@ -4,7 +4,8 @@ import requests
 import os
 import argparse
 
-def create_parser():
+def create_arg_link():
+    """It takes an arg to create a link."""
     parser = argparse.ArgumentParser()
     parser.add_argument('link')
     arg = parser.parse_args()
@@ -20,12 +21,12 @@ def request_short_link(link_name):
     link_data = {
         'long_url': link_name
             }
-    response_short_link = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=api_headers, 
+    response_short_link = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=api_headers,
     json = link_data)
     return response_short_link
 
 def create_short_link(response_short_link):
-    """It creates short link."""    
+    """It creates short link."""
     try:
         short_link = response_short_link.json()['link']
         return short_link
@@ -40,7 +41,7 @@ def request_clicks(link_name):
     count_click_response = requests.get('https://api-ssl.bitly.com/v4/bitlinks/{}/clicks/summary'.
     format(link_name), headers=api_headers, params = click_data)
     return count_click_response
-    
+
 def summary_clicks(count_click_response):
     """It summarizes clicks."""
     try:
@@ -52,14 +53,14 @@ def summary_clicks(count_click_response):
 if __name__ == '__main__':
     TOKEN = os.getenv('TOKEN')
     api_headers = {
-    'Authorization': 'Bearer ' + str(TOKEN) 
+    'Authorization': 'Bearer ' + str(TOKEN)
         }
 
-    link_name = create_parser()
+    link_name = create_arg_link()
     check = check_link(link_name)
     if check:
         response_short_link = request_short_link(link_name)
-        short_link = create_short_link(response_short_link)    
+        short_link = create_short_link(response_short_link)
         print(short_link)
     else:
         count_click_response = request_clicks(link_name)
