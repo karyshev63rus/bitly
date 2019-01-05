@@ -53,8 +53,8 @@ def summary_clicks(count_click_response):
 if __name__ == '__main__':
     TOKEN = os.getenv('TOKEN')
     api_headers = {
-        'Authorization': 'Bearer ' + str(TOKEN)
-            }
+    'Authorization': 'Bearer ' + str(TOKEN)
+        }
 
     link_name = create_arg_link()
     check = check_link(link_name)
