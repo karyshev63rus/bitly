@@ -15,7 +15,7 @@ def request_short_link(link_name):
     """It requests short link."""
     link_data = {
         'long_url': link_name
-            }
+    }
     response_short_link = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=api_headers,
     json = link_data)
     return response_short_link
@@ -32,7 +32,7 @@ def request_clicks(link_name):
     """It requests count of clicks."""
     click_data = {
         'unit': 'month',
-            }
+    }
     count_click_response = requests.get('https://api-ssl.bitly.com/v4/bitlinks/{}/clicks/summary'.
     format(link_name), headers=api_headers, params = click_data)
     return count_click_response
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     TOKEN = os.getenv('TOKEN')
     api_headers = {
         'Authorization': 'Bearer ' + str(TOKEN)
-            }
+    }
 
     link_name = create_arg_link()
     response_short_link = request_short_link(link_name)
