@@ -53,8 +53,8 @@ if __name__ == '__main__':
 
     link_name = create_arg_link()
     response_short_link = request_short_link(link_name)
-    if response_short_link:
-        short_link = create_short_link(response_short_link)
+    short_link = create_short_link(response_short_link)
+    if short_link:
         print(short_link)
     else:
         count_click_response = request_clicks(link_name)
